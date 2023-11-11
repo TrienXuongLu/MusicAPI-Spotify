@@ -4,15 +4,15 @@ import {View, Image, StyleSheet, Pressable, TextInput} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass';
 
-export default function TopSearch() {
+export default function TopSearch({navigation}) {
     const [text, setTExt] = useState('');
 
     return (
         <View style={styles.topSearch}>
             <Image source={require('../image/bluejayLogo.png')} style={styles.logo} />
-            <View>
+            <View style={styles.inputContainer}>
                 <TextInput style={styles.input} />
-                <FontAwesomeIcon icon={faMagnifyingGlass} style={styles.btn} size="25px" />
+                <FontAwesomeIcon icon={faMagnifyingGlass} size="25px" style={styles.search} onPress={() => navigation.navigate('List')} />
             </View>
         </View>
     );
@@ -20,7 +20,11 @@ export default function TopSearch() {
 
 const styles = StyleSheet.create({
     topSearch: {
-        
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        height: 80,
+        paddingTop: 10,
+        backgroundColor: '#fff',
     },
 
     logo: {
@@ -28,12 +32,25 @@ const styles = StyleSheet.create({
         height: 80,
     },
 
-    btn: {
-        height: 40,
-        width: 100,
+    inputContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingTop: 20,
+        marginRight: 10,
+    },
+
+    input: {
         borderColor: 'black',
+        borderStyle: 'solid',
         borderWidth: 1,
         borderRadius: 5,
-        borderStyle: 'solid',
-    }
-});
+        height: 40,
+        width: 250,
+    },
+
+    search: {
+        alignSelf: 'center',
+        top: -5,
+        marginLeft: 10,
+    },
+})
