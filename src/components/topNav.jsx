@@ -4,19 +4,29 @@ import {View, Image, StyleSheet, Pressable, Button} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons/faMagnifyingGlass';
 import {faUser} from '@fortawesome/free-solid-svg-icons/faUser';
+import {useNavigation} from '@react-navigation/native';
 
-export default function TopNav({navigation}) {
+export default function TopNav() {
 
+    const navigation = useNavigation();
+
+    const goToSearch = () => {
+        navigation.navigate('Search');
+    };
+
+    const goToAccount = () => {
+        navigation.navigate('Account');
+    }
 
     return (
         <StrictMode>
             <View style={styles.topNav}>
                 <Image source={require('../image/bluejayLogo.png')} style={styles.logo} />
                 <View style={styles.left}>
-                    <Pressable onPress={() => navigation.navigate('Search')}>
+                    <Pressable onPress={goToSearch}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} style={styles.btn} size="25px" />
                     </Pressable>
-                    <Pressable onPress={() => navigation.navigate('Account')}>
+                    <Pressable onPress={goToAccount}>
                         <FontAwesomeIcon icon={faUser} style={styles.btn} size="25px" />
                     </Pressable>
                 </View>
@@ -31,11 +41,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         height: '10px',
+        backgroundColor: '#fff',
     },
 
     logo: {
-        width: 80,
-        height: 80,
+        width: 70,
+        height: 70,
     },
 
     left: {
@@ -43,6 +54,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around',
         alignItems: 'center',
         marginRight: 5,
+        backgroundColor: '#fff',
     },
 
     btn: {
